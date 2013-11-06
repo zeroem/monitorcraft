@@ -31,3 +31,13 @@
         owner={{ minecraft_user }}
         group={{ minecraft_group }}
         mode=0555
+
+- name: install minecraft server upstart
+  template: src=minecraft-server.conf.j2
+            dest=/etc/init/minecraft-server.conf
+            mode=0644
+
+- name: Start up Minecraft Server
+  service: name=minecraft-server
+           state=started
+

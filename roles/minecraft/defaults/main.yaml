@@ -3,3 +3,6 @@ minecraft_bin_dir: /opt/lib/minecraft
 minecraft_chdir: /var/minecraft
 minecraft_user: minecraft
 minecraft_group: minecraft
+
+minecraft_Xms: 1G
+minecraft_Xmx: 2G
