@@ -1,7 +1,4 @@
-minecraft_binary:
-  url: https://s3.amazonaws.com/Minecraft.Download/versions/1.7.2/minecraft_server.1.7.2.jar
-  sha256: b4139899700c1bdbf72880eec4bdb9e46c2cf22d1724a48a018ee0330035462e
-
+minecraft_binary: minecraft_server.1.7.2.jar
 minecraft_bin_dir: /opt/lib/minecraft
 minecraft_chdir: /var/minecraft
 minecraft_user: minecraft

@@ -27,10 +27,8 @@
   with_items: [ minecraft_bin_dir, minecraft_chdir ]
 
 - name: Get Minecraft Server jar
-  get_url: url={{ minecraft_binary.url }}
-           sha256sum={{ minecraft_binary.sha256 }}
-           dest={{ minecraft_bin_dir }}/minecraft-server.jar
-           owner={{ minecraft_user }}
-           group={{ minecraft_group }}
-           mode=0555
-  sudo_user: "{{ minecraft_user }}"
+  copy: src={{ minecraft_binary }}
+        dest={{ minecraft_bin_dir }}/minecraft-server.jar
+        owner={{ minecraft_user }}
+        group={{ minecraft_group }}
+        mode=0555
