@@ -2,3 +2,4 @@
 /roles/supervisord
 /.vagrant
 /vagrant_ansible_inventory*
+roles/minecraft/files/minecraft_server.1.7.2.jar
