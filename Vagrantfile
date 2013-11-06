@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "minecraft-server" do |mc|
     mc.vm.box = VM_BOX
     mc.vm.provision :ansible do |ansible|
+      ansible.host_key_checking = false
       ansible.verbose = "v"
       ansible.playbook = "minecraft-server.yaml"
     end
