@@ -23,8 +23,7 @@
         group={{ minecraft_group }}
         mode=0755
         recurse=yes
-
-  with_items: [ minecraft_bin_dir, minecraft_chdir ]
+  with_items: [ "{{ minecraft_bin_dir }}", "{{ minecraft_chdir }}" ]
 
 - name: Get Minecraft Server jar
   copy: src={{ minecraft_binary }}
