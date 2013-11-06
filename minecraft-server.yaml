@@ -1,0 +1,13 @@
+- hosts: all
+  sudo: yes
+
+  roles:
+    - role: "minecraft"
+    - role: "supervise"
+      name: "minecraft-server"
+      chdir: "{{ minecraft_chdir }}"
+      user: "{{ minecraft_user }}"
+      command: "java -Xms 1G -Xmx 2G -jar {{ minecraft_bin_dir }}/minecraft-server.jar nogui"
+
+
+    

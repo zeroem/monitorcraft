@@ -1,2 +1,4 @@
 /roles/supervise
 /roles/supervisord
+/.vagrant
+/vagrant_ansible_inventory*

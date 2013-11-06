@@ -1,0 +1,36 @@
+- name: Update package caches
+  shell: apt-get update
+
+- name: Install packages
+  apt: pkg=openjdk-7-jre-headless state=present
+
+- name: create group
+  group: name={{ minecraft_group }}
+         state=present
+         system=yes
+
+- name: make user
+  user: name={{ minecraft_user }}
+        group={{ minecraft_group }}
+        createhome=no
+        system=yes
+        state=present
+
+- name: Make Directories
+  file: path={{ item }}
+        state=directory
+        owner={{ minecraft_user }}
+        group={{ minecraft_group }}
+        mode=0755
+        recurse=yes
+
+  with_items: [ minecraft_bin_dir, minecraft_chdir ]
+
+- name: Get Minecraft Server jar
+  get_url: url={{ minecraft_binary.url }}
+           sha256sum={{ minecraft_binary.sha256 }}
+           dest={{ minecraft_bin_dir }}/minecraft-server.jar
+           owner={{ minecraft_user }}
+           group={{ minecraft_group }}
+           mode=0555
+  sudo_user: "{{ minecraft_user }}"

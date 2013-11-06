@@ -9,9 +9,12 @@ VM_BOX = "ubuntu13-ansible"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
-  config.vm.define "minecraft" do |mc|
+  config.vm.define "minecraft-server" do |mc|
     mc.vm.box = VM_BOX
-
+    mc.vm.provision :ansible do |ansible|
+      ansible.verbose = "v"
+      ansible.playbook = "minecraft-server.yaml"
+    end
   end
 
 
