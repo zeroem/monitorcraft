@@ -7,7 +7,4 @@
       name: "minecraft-server"
       chdir: "{{ minecraft_chdir }}"
       user: "{{ minecraft_user }}"
-      command: "java -Xms 1G -Xmx 2G -jar {{ minecraft_bin_dir }}/minecraft-server.jar nogui"
-
-
-    
+      command: "java -Xms1G -Xmx2G -jar {{ minecraft_bin_dir }}/minecraft-server.jar nogui"
