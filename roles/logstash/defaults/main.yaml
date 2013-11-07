@@ -10,4 +10,4 @@ logstash_upstart_name: logstash
 
 logstash_conf_file: "{{ logstash_conf_dir }}/{{ logstash_upstart_name }}.conf"
 
-logstash_opts: "agent -f {{ logstash_conf_file }} -- web"
+logstash_opts: "web -- agent -f {{ logstash_conf_file }}"
