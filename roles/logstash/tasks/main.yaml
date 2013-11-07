@@ -6,7 +6,8 @@
 - name: make user
   user: name={{ logstash_user }}
         group={{ logstash_group }}
-        createhome=no
+        createhome=yes
+        home={{ logstash_home }}
         system=yes
         state=present
 
@@ -17,7 +18,7 @@
         group={{ logstash_group }}
         mode=0775
         recurse=yes
-  with_items: [ "{{ logstash_bin_dir }}", "{{ logstash_chdir }}", "{{ logstash_conf_dir }}" ]
+  with_items: [ "{{ logstash_bin_dir }}", "{{ logstash_home }}", "{{ logstash_conf_dir }}" ]
 
 - name: Get Logstash jar
   copy: src={{ logstash_binary }}

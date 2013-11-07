@@ -1,6 +1,6 @@
 logstash_binary: logstash-1.2.2-flatjar.jar
 logstash_bin_dir: /opt/lib/logstash
-logstash_chdir: /var/logstash
+logstash_home: /var/logstash
 logstash_conf_dir: /etc/logstash.d
 logstash_user: logstash
 logstash_group: logstash

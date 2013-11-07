@@ -2,7 +2,7 @@
 
 console log
 
-exec start-stop-daemon --start --chdir {{ logstash_chdir }} --chuid {{ logstash_user }} \
+exec start-stop-daemon --start --chdir {{ logstash_home }} --chuid {{ logstash_user }} \
     --user {{ logstash_user }} --exec /usr/bin/java -- {{ logstash_java_opts }} \
     -jar {{ logstash_bin_dir}}/logstash-flat.jar {{ logstash_opts }} 2>&1
 
