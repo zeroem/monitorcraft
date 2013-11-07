@@ -1,0 +1,13 @@
+# description "start and stop the logstash-server"
+
+console log
+
+exec start-stop-daemon --start --chdir {{ logstash_chdir }} --chuid {{ logstash_user }} \
+    --user {{ logstash_user }} --exec /usr/bin/java -- {{ logstash_java_opts }} \
+    -jar {{ logstash_bin_dir}}/logstash-flat.jar {{ logstash_opts }} 2>&1
+
+start on runlevel [2345]
+stop on runlevel [^2345]
+
+respawn
+respawn limit 20 5

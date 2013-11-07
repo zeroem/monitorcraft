@@ -2,4 +2,6 @@
   sudo: yes
 
   roles:
+    - role: "logstash"
+      logstash_conf_template: ./logstash.d/simple-web.conf
     - role: "minecraft"

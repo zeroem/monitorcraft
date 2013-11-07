@@ -1,0 +1,45 @@
+- name: Install packages
+  apt: pkg=openjdk-7-jre-headless state=present
+
+- name: create group
+  group: name={{ logstash_group }}
+         state=present
+         system=yes
+
+- name: make user
+  user: name={{ logstash_user }}
+        group={{ logstash_group }}
+        createhome=no
+        system=yes
+        state=present
+
+- name: Make Directories
+  file: path={{ item }}
+        state=directory
+        owner={{ logstash_user }}
+        group={{ logstash_group }}
+        mode=0775
+        recurse=yes
+  with_items: [ "{{ logstash_bin_dir }}", "{{ logstash_chdir }}", "{{ logstash_conf_dir }}" ]
+
+- name: Get Logstash jar
+  copy: src={{ logstash_binary }}
+        dest={{ logstash_bin_dir }}/logstash-flat.jar
+        owner={{ logstash_user }}
+        group={{ logstash_group }}
+        mode=0555
+
+- name: Install logstash Conf
+  copy: src={{ logstash_conf_template }}
+            dest={{ logstash_conf_file }}
+            mode=0664
+
+- name: install logstash into upstart
+  template: src=logstash.conf.j2
+            dest=/etc/init/{{ logstash_upstart_name }}.conf
+            mode=0664
+
+- name: Start up logstash
+  service: name={{ logstash_upstart_name }}
+           state=started
+
