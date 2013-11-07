@@ -3,5 +3,5 @@
 
   roles:
     - role: "logstash"
-      logstash_conf_template: ./logstash.d/simple-web.conf
+      logstash_conf_template: ./logstash.d/minecraft-server.conf
     - role: "minecraft"
