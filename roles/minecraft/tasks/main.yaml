@@ -1,9 +1,3 @@
-- name: Update package caches
-  shell: apt-get update
-
-- name: Install packages
-  apt: pkg=openjdk-7-jre-headless state=present
-
 - name: create group
   group: name={{ minecraft_group }}
          state=present
