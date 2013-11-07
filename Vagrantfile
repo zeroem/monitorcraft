@@ -4,7 +4,7 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-VM_BOX = "ubuntu13-ansible"
+VM_BOX = "ubuntu13-monitorcraft-base"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 

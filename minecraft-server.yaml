@@ -1,12 +1,6 @@
 - hosts: all
   sudo: yes
 
-  pre_tasks:
-    - shell: apt-get update
-
-    - name: Install packages
-      apt: pkg=openjdk-7-jre-headless state=present
-
   roles:
     - role: "logstash"
       logstash_conf_template: ./logstash.d/simple-web.conf
