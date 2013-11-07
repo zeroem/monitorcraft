@@ -1,6 +1,9 @@
 - hosts: all
   sudo: yes
 
+  vars:
+    minecraft_logstash_shipper_port: 9999
+
   roles:
     - role: "logstash"
       logstash_conf_template: ./logstash.d/minecraft-server.conf

@@ -4,5 +4,5 @@ minecraft_chdir: /var/minecraft
 minecraft_user: minecraft
 minecraft_group: minecraft
 
-minecraft_Xms: 1G
-minecraft_Xmx: 2G
+minecraft_java_opts: "-Xms1G -Xmx2G"
+minecraft_logging_opts: "-Dlog4j.configurationFile={{ minecraft_bin_dir }}/log4j2.xml"

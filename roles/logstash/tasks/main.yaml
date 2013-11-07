@@ -28,7 +28,7 @@
         mode=0555
 
 - name: Install logstash Conf
-  copy: src={{ logstash_conf_template }}
+  template: src={{ logstash_conf_template }}
             dest={{ logstash_conf_file }}
             mode=0664
 

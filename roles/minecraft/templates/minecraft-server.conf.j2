@@ -3,7 +3,7 @@
 console log
 
 exec start-stop-daemon --start --chdir {{ minecraft_chdir }} --chuid {{ minecraft_user }}:{{ minecraft_group }} \
-    --user {{ minecraft_user }} --exec /usr/bin/java -- -Xms{{ minecraft_Xms }} -Xmx{{ minecraft_Xmx }} \
+    --user {{ minecraft_user }} --exec /usr/bin/java -- {{ minecraft_java_opts }} {{ minecraft_logging_opts }} \
     -jar {{ minecraft_bin_dir}}/minecraft-server.jar nogui 2>&1
 
 start on runlevel [2345]
