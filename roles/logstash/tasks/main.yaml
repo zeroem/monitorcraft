@@ -6,7 +6,7 @@
 - name: make user
   user: name={{ logstash_user }}
         group={{ logstash_group }}
-        createhome=yes
+        createhome=no
         home={{ logstash_home }}
         system=yes
         state=present

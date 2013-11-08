@@ -6,6 +6,7 @@
 - name: make user
   user: name={{ minecraft_user }}
         group={{ minecraft_group }}
+        home={{ minecraft_chdir }}
         createhome=no
         system=yes
         state=present
