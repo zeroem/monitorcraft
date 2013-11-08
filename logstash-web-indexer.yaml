@@ -1,0 +1,6 @@
+- hosts: all
+  sudo: yes
+
+  roles:
+    - role: "logstash"
+      logstash_conf_template: ./logstash.d/logstash-web-indexer.conf

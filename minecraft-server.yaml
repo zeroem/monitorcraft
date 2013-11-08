@@ -2,7 +2,9 @@
   sudo: yes
 
   vars:
-    minecraft_logstash_shipper_port: 9999
+    minecraft_logstash_elasticsearch_host: logstash-web-indexer
+    minecraft_logstash_elasticsearch_port: 9300
+    logstash_opts: agent -f {{ logstash_conf_file }}
 
   roles:
     - role: "logstash"
