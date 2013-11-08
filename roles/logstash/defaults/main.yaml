@@ -7,7 +7,7 @@ logstash_group: logstash
 
 logstash_java_opts: ""
 logstash_upstart_name: logstash
-
+logstash_conf_template: ""
 logstash_conf_file: "{{ logstash_conf_dir }}/{{ logstash_upstart_name }}.conf"
 
 logstash_opts: "agent -f {{ logstash_conf_file }} -- web"

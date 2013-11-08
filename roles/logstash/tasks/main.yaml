@@ -31,6 +31,7 @@
   template: src={{ logstash_conf_template }}
             dest={{ logstash_conf_file }}
             mode=0664
+  when: logstash_conf_template != ""
 
 - name: install logstash into upstart
   template: src=logstash.conf.j2
