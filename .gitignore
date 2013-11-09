@@ -4,3 +4,4 @@
 /vagrant_ansible_inventory*
 roles/minecraft/files/minecraft_server*.jar
 roles/logstash/files/logstash*.jar
+roles/redis/files/redis-2.6.16.tar.gz

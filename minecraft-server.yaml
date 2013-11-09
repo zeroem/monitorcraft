@@ -1,9 +1,12 @@
 - hosts: all
   sudo: yes
 
+  vars_files:
+    - shared-vars.yaml
+
   vars:
-    minecraft_logstash_elasticsearch_host: logstash-web-indexer
-    minecraft_logstash_elasticsearch_port: 9300
+    minecraft_logstash_redis_host: "{{ logstash_redis_host }}"
+    minecraft_logstash_redis_port: "{{ logstash_redis_port }}"
     logstash_opts: agent -f {{ logstash_conf_file }}
 
   roles:

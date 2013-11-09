@@ -1,0 +1,12 @@
+redis_extracted_dir: redis-2.6.16
+redis_binary: "{{ redis_extracted_dir }}.tar.gz"
+redis_bin_dir: /opt/redis
+redis_src_dir: "{{ redis_bin_dir }}/{{ redis_extracted_dir }}"
+redis_home: /var/redis
+redis_conf_dir: /etc/redis.d
+redis_user: redis
+redis_group: redis
+
+redis_upstart_name: redis
+redis_conf_template: redis-server.conf.j2
+redis_conf_file: "{{ redis_home }}/{{ redis_upstart_name }}.conf"

@@ -1,0 +1,60 @@
+- name: create group
+  group: name={{ redis_group }}
+         state=present
+         system=yes
+
+- name: make user
+  user: name={{ redis_user }}
+        group={{ redis_group }}
+        createhome=no
+        home={{ redis_home }}
+        system=yes
+        state=present
+
+- name: Make Directories
+  file: path={{ item }}
+        state=directory
+        owner={{ redis_user }}
+        group={{ redis_group }}
+        mode=0775
+        recurse=yes
+  with_items: [ "{{ redis_bin_dir }}", "{{ redis_home }}", "{{ redis_conf_dir }}" ]
+
+- name: Get redis tarball 
+  copy: src={{ redis_binary }}
+        dest={{ redis_bin_dir }}/
+        owner={{ redis_user }}
+        group={{ redis_group }}
+        mode=0555
+
+- name: untar the source
+  command: chdir={{ redis_bin_dir }}
+           creates={{ redis_extracted_dir }}
+           tar -xzf {{ redis_bin_dir}}/{{ redis_binary }}
+
+- name: perms
+  file: path={{ redis_src_dir }}
+        state=directory
+        group={{ redis_group }}
+        owner={{ redis_user }}
+        recurse=yes
+
+- name: Make!
+  command: chdir={{ redis_src_dir }}
+           creates={{redis_src_dir }}/src/redis-server
+           make
+
+- name: Redis conf file
+  template: src={{ redis_conf_template }}
+            dest={{ redis_conf_file }}
+            mode=0644
+
+- name: install redis into upstart
+  template: src=redis.conf.j2
+            dest=/etc/init/{{ redis_upstart_name }}.conf
+            mode=0664
+
+- name: Start up redis
+  service: name={{ redis_upstart_name }}
+           state=started
+

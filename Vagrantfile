@@ -13,6 +13,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
 
+  config.vm.define "logstash-redis-broker" do |redis|
+    redis.vm.box = VM_BOX
+
+    redis.vm.provision :ansible do |ansible|
+      ansible.host_key_checking = false
+      ansible.verbose = "vvv"
+      ansible.playbook = "logstash-redis-broker.yaml"
+    end
+  end
+
   config.vm.define "logstash-web-indexer" do |ls|
     ls.vm.box = VM_BOX
 

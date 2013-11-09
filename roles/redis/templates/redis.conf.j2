@@ -1,0 +1,12 @@
+# description "start and stop the redis-server"
+
+console log
+
+exec start-stop-daemon --start --chdir {{ redis_home }} --chuid {{ redis_user }} \
+    --user {{ redis_user }} --exec {{ redis_src_dir}}/src/redis-server {{ redis_conf_file }} 2>&1
+
+start on runlevel [2345]
+stop on runlevel [^2345]
+
+respawn
+respawn limit 20 5
