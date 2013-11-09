@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "logstash-redis-broker" do |redis|
     redis.vm.box = VM_BOX
-
+    redis.vm.hostname = "logstash-redis-broker"
     redis.vm.provision :ansible do |ansible|
       ansible.host_key_checking = false
       ansible.verbose = "vvv"
@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "logstash-web-indexer" do |ls|
     ls.vm.box = VM_BOX
+    ls.vm.hostname = "logstash-web-indexer"
 
     ls.vm.provision :ansible do |ansible|
       ansible.host_key_checking = false
@@ -35,7 +36,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "minecraft-server" do |mc|
     mc.vm.box = VM_BOX
-
+    mc.vm.hostname = "logstash-server"
+    mc.vm.network :forwarded_port, guest: 25565, host: 25565
     mc.vm.provision :ansible do |ansible|
       ansible.host_key_checking = false
       ansible.verbose = "v"
