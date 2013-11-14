@@ -1,0 +1,23 @@
+graphite_home: /var/graphite
+graphite_user: graphite
+graphite_group: graphite
+target_dir: /opt/graphite
+virtualenv_home: "{{ target_dir }}/.virtualenvs"
+graphite_repos_dir: "{{ target_dir }}/repos"
+
+graphite_virtualenv: "{{virtualenv_home}}/graphite"
+graphite_bin: "{{ graphite_virtualenv }}/bin"
+graphite_python: "{{ graphite_bin }}/python"
+graphite_gunicorn_django: "{{ graphite_virtualenv }}/bin/gunicorn_django"
+
+graphite_packages:
+  - graphite-web
+  - carbon
+  - ceres
+graphite_version: "master"
+
+graphite_carbon_conf_files:
+  - carbon.conf
+  - storage-schemas.conf
+
+graphite_web_bind: 0.0.0.0:8000

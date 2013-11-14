@@ -1,0 +1,68 @@
+- name: create group
+  group: name={{ graphite_group }}
+         state=present
+         system=yes
+
+- name: make user
+  user: name={{ graphite_user }}
+        group={{ graphite_group }}
+        createhome=no
+        home={{ graphite_home }}
+        system=yes
+        state=present
+
+- file: state=directory
+        path={{ item }}
+        owner={{ graphite_user }}
+        group={{ graphite_group }}
+  with_items: [ "{{ graphite_home }}", "{{ graphite_repos_dir }}" ]
+
+- name: download graphite packages
+  git: repo=https://github.com/graphite-project/{{ item }}
+       version={{ graphite_version }}
+       dest={{ graphite_repos_dir }}/{{ item }}
+       depth=1
+  with_items: graphite_packages
+
+- name: workaround for network blocking git://
+  command: sed -i -e "s/git+git/git+https/" {{ graphite_repos_dir }}/{{ item }}/requirements.txt
+  with_items: graphite_packages
+
+- name: install graphite deps
+  pip: requirements={{ graphite_repos_dir }}/{{ item }}/requirements.txt
+       virtualenv={{ graphite_virtualenv }}
+  with_items: graphite_packages
+
+- name: set install dir
+  lineinfile: dest={{ graphite_repos_dir }}/{{ item }}/setup.cfg
+               state=present
+               regexp=^prefix.*
+               line=prefix={{ graphite_home }}
+               backup=yes
+  when: item != "ceres"
+  with_items: graphite_packages
+
+- name: setup graphite apps
+  command: chdir={{graphite_repos_dir }}/{{ item }}
+           {{ graphite_python }} setup.py build install
+  with_items: graphite_packages
+
+- name: copy example confs to main conf
+  command: chdir={{ graphite_home }}/conf
+           creates={{ graphite_home }}/conf/{{ item }} 
+           cp {{ item }}.example {{ item }}
+  with_items: graphite_carbon_conf_files
+
+- name: change sqlite storage location
+  lineinfile: >
+    dest={{ graphite_home }}/webapp/graphite/settings.py
+    state=present
+    regexp=\'NAME\':\\s+\'/opt
+    line="'NAME': '{{ graphite_home }}/storage/graphite_db',"
+    backup=yes
+
+- name: setup sqlite
+  command: chdir={{ graphite_home }}/webapp/graphite
+           {{ graphite_python }} manage.py syncdb --noinput
+  environment:
+    PYTHONPATH: "{{ graphite_home }}/webapp"

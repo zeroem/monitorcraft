@@ -13,6 +13,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
 
+  config.vm.define "graphite" do |graphite|
+    graphite.vm.box = VM_BOX
+    graphite.vm.hostname = "graphite"
+    graphite.vm.provision :ansible do |ansible|
+      ansible.host_key_checking = false
+      ansible.verbose = "v"
+      ansible.playbook = "ansible/graphite.yaml"
+    end
+  end
+
   config.vm.define "logstash-redis-broker" do |redis|
     redis.vm.box = VM_BOX
     redis.vm.hostname = "logstash-redis-broker"
