@@ -15,6 +15,7 @@
         path={{ item }}
         owner={{ graphite_user }}
         group={{ graphite_group }}
+        recurse=yes
   with_items: [ "{{ graphite_home }}", "{{ graphite_repos_dir }}" ]
 
 - name: download graphite packages
@@ -66,3 +67,9 @@
            {{ graphite_python }} manage.py syncdb --noinput
   environment:
     PYTHONPATH: "{{ graphite_home }}/webapp"
+
+- name: install carbon-cache server upstart
+  template: src=carbon-cache.conf.j2
+            dest=/etc/init/carbon-cache.conf
+            mode=0644
+
