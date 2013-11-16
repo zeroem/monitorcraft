@@ -12,3 +12,6 @@ apt-get -y --fix-missing install \
 apt-get -y remove --auto-remove puppet 
 
 echo "UseDNS no" >> /etc/ssh/sshd_config
+
+echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
+chmod 0440 /etc/sudoers.d/vagrant
