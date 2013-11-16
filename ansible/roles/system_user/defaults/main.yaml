@@ -1,0 +1,5 @@
+system_user_group: "{{ system_user }}"
+system_user_additional_groups: ""
+system_user_home: "/var/{{ system_user }}"
+system_user_create_home: yes
+system_user_dirs: [ "{{ system_user_home }}" ]

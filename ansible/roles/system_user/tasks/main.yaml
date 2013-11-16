@@ -1,0 +1,20 @@
+- name: create group
+  group: name={{ system_user_group }}
+         state=present
+         system=yes
+
+- name: make user
+  user: name={{ system_user }}
+        group={{ system_user_group }}
+        groups={{ system_user_additional_groups }}
+        createhome={{ system_user_create_home }}
+        home={{ system_user_home }}
+        system=yes
+        state=present
+
+- file: state=directory
+        path={{ item }}
+        owner={{ system_user }}
+        group={{ system_user_group }}
+  with_items: system_user_dirs
+

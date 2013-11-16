@@ -1,25 +1,3 @@
-- name: create group
-  group: name={{ logstash_group }}
-         state=present
-         system=yes
-
-- name: make user
-  user: name={{ logstash_user }}
-        group={{ logstash_group }}
-        createhome=no
-        home={{ logstash_home }}
-        system=yes
-        state=present
-
-- name: Make Directories
-  file: path={{ item }}
-        state=directory
-        owner={{ logstash_user }}
-        group={{ logstash_group }}
-        mode=0775
-        recurse=yes
-  with_items: [ "{{ logstash_bin_dir }}", "{{ logstash_home }}", "{{ logstash_conf_dir }}" ]
-
 - name: Get Logstash jar
   copy: src={{ logstash_binary }}
         dest={{ logstash_bin_dir }}/logstash-flat.jar

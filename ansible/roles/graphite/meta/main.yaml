@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: system_user
+    system_user: "{{ graphite_user }}"
+    system_user_dirs:
+      - "{{ system_user_home }}"
+      - "{{ graphite_resources_dir }}"
+      - "{{ graphite_repos_dir }}"

@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: system_user
+    system_user: "{{ logstash_user }}"
+    system_user_dirs:
+      - "{{ logstash_bin_dir }}"
+      - "{{ logstash_home }}"
+      - "{{ logstash_conf_dir }}"

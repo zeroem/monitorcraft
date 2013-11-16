@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: system_user
+    system_user: "{{ minecraft_user }}"
+    system_user_dirs:
+      - "{{ minecraft_bin_dir }}"
+      - "{{ minecraft_chdir }}"

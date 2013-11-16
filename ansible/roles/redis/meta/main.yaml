@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: system_user
+    system_user: "{{ redis_user }}"
+    system_user_dirs:
+      - "{{ redis_bin_dir }}"
+      - "{{ redis_home }}"
+      - "{{ redis_conf_dir }}"

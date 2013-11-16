@@ -1,25 +1,3 @@
-- name: create group
-  group: name={{ redis_group }}
-         state=present
-         system=yes
-
-- name: make user
-  user: name={{ redis_user }}
-        group={{ redis_group }}
-        createhome=no
-        home={{ redis_home }}
-        system=yes
-        state=present
-
-- name: Make Directories
-  file: path={{ item }}
-        state=directory
-        owner={{ redis_user }}
-        group={{ redis_group }}
-        mode=0775
-        recurse=yes
-  with_items: [ "{{ redis_bin_dir }}", "{{ redis_home }}", "{{ redis_conf_dir }}" ]
-
 - name: Get redis tarball 
   copy: src={{ redis_binary }}
         dest={{ redis_bin_dir }}/
