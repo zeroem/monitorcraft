@@ -57,7 +57,11 @@
   sudo_user: "{{ graphite_user }}"
 
 - name: install carbon-cache server upstart
-  template: src=carbon-cache.conf.j2
-            dest=/etc/init/carbon-cache.conf
+  template: src={{ item }}.conf.j2
+            dest=/etc/init/{{ item }}.conf
             mode=0644
+  with_items: [ "carbon-cache", "graphite-web" ]
 
+- name: get graphite running
+  service: name={{ item }} state=restarted 
+  with_items: [ "carbon-cache", "graphite-web" ]

@@ -1,0 +1,14 @@
+# description "start and stop the minecraft-server"
+
+console log
+
+exec start-stop-daemon \
+  --chdir {{ graphite_home }}/webapp/graphite --chuid {{ graphite_user }}:{{ graphite_group }} \
+  --user {{ graphite_user }} \
+  --exec {{ graphite_gunicorn_django }} --start -- --bind={{ graphite_web_bind }}
+
+start on runlevel [2345]
+stop on runlevel [^2345]
+
+respawn
+respawn limit 20 5
