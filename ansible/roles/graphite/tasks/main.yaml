@@ -16,7 +16,7 @@
         owner={{ graphite_user }}
         group={{ graphite_group }}
         recurse=yes
-  with_items: [ "{{ graphite_home }}", "{{ graphite_repos_dir }}" ]
+  with_items: [ "{{ graphite_home }}", "{{ graphite_resources_dir }}", "{{ graphite_repos_dir }}" ]
 
 - name: download graphite packages
   git: repo=https://github.com/graphite-project/{{ item }}
@@ -24,15 +24,18 @@
        dest={{ graphite_repos_dir }}/{{ item }}
        depth=1
   with_items: graphite_packages
+  sudo_user: "{{ graphite_user }}"
 
 - name: workaround for network blocking git://
   command: sed -i -e "s/git+git/git+https/" {{ graphite_repos_dir }}/{{ item }}/requirements.txt
   with_items: graphite_packages
+  sudo_user: "{{ graphite_user }}"
 
 - name: install graphite deps
   pip: requirements={{ graphite_repos_dir }}/{{ item }}/requirements.txt
        virtualenv={{ graphite_virtualenv }}
   with_items: graphite_packages
+  sudo_user: "{{ graphite_user }}"
 
 - name: set install dir
   lineinfile: dest={{ graphite_repos_dir }}/{{ item }}/setup.cfg
@@ -42,17 +45,20 @@
                backup=yes
   when: item != "ceres"
   with_items: graphite_packages
+  sudo_user: "{{ graphite_user }}"
 
 - name: setup graphite apps
   command: chdir={{graphite_repos_dir }}/{{ item }}
            {{ graphite_python }} setup.py build install
   with_items: graphite_packages
+  sudo_user: "{{ graphite_user }}"
 
 - name: copy example confs to main conf
   command: chdir={{ graphite_home }}/conf
            creates={{ graphite_home }}/conf/{{ item }} 
            cp {{ item }}.example {{ item }}
   with_items: graphite_carbon_conf_files
+  sudo_user: "{{ graphite_user }}"
 
 - name: change sqlite storage location
   lineinfile: >
@@ -61,12 +67,14 @@
     regexp=\'NAME\':\\s+\'/opt
     line="'NAME': '{{ graphite_home }}/storage/graphite_db',"
     backup=yes
+  sudo_user: "{{ graphite_user }}"
 
 - name: setup sqlite
   command: chdir={{ graphite_home }}/webapp/graphite
            {{ graphite_python }} manage.py syncdb --noinput
   environment:
     PYTHONPATH: "{{ graphite_home }}/webapp"
+  sudo_user: "{{ graphite_user }}"
 
 - name: install carbon-cache server upstart
   template: src=carbon-cache.conf.j2

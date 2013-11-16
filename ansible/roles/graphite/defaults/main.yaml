@@ -1,9 +1,9 @@
 graphite_home: /var/graphite
 graphite_user: graphite
 graphite_group: graphite
-target_dir: /opt/graphite
-virtualenv_home: "{{ target_dir }}/.virtualenvs"
-graphite_repos_dir: "{{ target_dir }}/repos"
+graphite_resources_dir: /opt/graphite
+virtualenv_home: "{{ graphite_resources_dir }}/.virtualenvs"
+graphite_repos_dir: "{{ graphite_resources_dir }}/repos"
 
 graphite_virtualenv: "{{virtualenv_home}}/graphite"
 graphite_bin: "{{ graphite_virtualenv }}/bin"
