@@ -10,11 +10,10 @@
     logstash_opts: agent -f {{ logstash_conf_file }}
 
   roles:
-    - role: "minecraft"
+    - role: minecraft
     - role: logstash
       logstash_user: "{{ minecraft_user }}"
       logstash_group: "{{ minecraft_group }}"
       logstash_home: "{{ minecraft_chdir }}"
       logstash_conf_dir: "{{ minecraft_chdir }}"
       logstash_conf_template: "logstash.d/minecraft-server.conf.j2"
-
