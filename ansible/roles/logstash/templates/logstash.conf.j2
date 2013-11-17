@@ -14,7 +14,7 @@ limit nofile 65550 65550
 # data directory to be created and ensure /opt/logstash is owned
 # by logstash:adm
 
-#env HOME=/opt/logstash
+env HOME={{ logstash_home }}
 
 #env JAVA_OPTS='-Xms512m -Xmx512m'
 
