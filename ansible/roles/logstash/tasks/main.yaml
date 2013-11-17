@@ -1,3 +1,8 @@
+- name: logstash bin dir
+  file: path={{ logstash_bin_dir }}
+        state=directory
+        mode=0755
+
 - name: Get Logstash jar
   copy: src={{ logstash_binary }}
         dest={{ logstash_bin_dir }}/logstash-flat.jar
@@ -18,5 +23,5 @@
 
 - name: Start up logstash
   service: name={{ logstash_upstart_name }}
-           state=started
+           state=restarted
 

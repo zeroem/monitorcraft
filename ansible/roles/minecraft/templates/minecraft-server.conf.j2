@@ -1,13 +1,25 @@
-# description "start and stop the minecraft-server"
+# minecraft server
+#
 
-console log
+description     "minecraft server"
 
-exec start-stop-daemon --start --chdir {{ minecraft_chdir }} --chuid {{ minecraft_user }}:{{ minecraft_group }} \
-    --user {{ minecraft_user }} --exec /usr/bin/java -- {{ minecraft_java_opts }} {{ minecraft_logging_opts }} \
-    -jar {{ minecraft_bin_dir}}/minecraft-server.jar nogui 2>&1
-
-start on runlevel [2345]
-stop on runlevel [^2345]
+start on virtual-filesystems
+stop on runlevel [06]
 
 respawn
-respawn limit 20 5
+respawn limit 5 30
+
+env HOME={{ minecraft_chdir }}
+
+chdir {{ minecraft_chdir }}
+setuid {{ minecraft_user }}
+setgid {{ minecraft_group }}
+console log
+
+# for versions 1.1.1 - 1.1.4 the internal web service crashes when touched
+# and the current workaround is to just not run it and run Kibana instead
+
+script
+        exec java {{ minecraft_java_opts }} {{ minecraft_logging_opts }} \
+          -jar {{ minecraft_bin_dir}}/minecraft-server.jar nogui
+end script
