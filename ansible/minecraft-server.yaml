@@ -17,3 +17,8 @@
       logstash_home: "{{ minecraft_chdir }}"
       logstash_conf_dir: "{{ minecraft_chdir }}"
       logstash_conf_template: "logstash.d/minecraft-server.conf.j2"
+
+  tasks:
+    - service: name=minecraft-server
+               state=restarted
+

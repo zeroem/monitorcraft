@@ -17,7 +17,3 @@
             dest=/etc/init/minecraft-server.conf
             mode=0644
 
-- name: Start up Minecraft Server
-  service: name=minecraft-server
-           state=started
-
