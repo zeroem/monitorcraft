@@ -11,7 +11,7 @@
             owner={{ logstash_user }}
             group={{ logstash_group }}
             mode=0664
-  when: logstash_conf_template
+  when: logstash_conf_template != ""
 
 - name: install logstash into upstart
   template: src=logstash.conf.j2
