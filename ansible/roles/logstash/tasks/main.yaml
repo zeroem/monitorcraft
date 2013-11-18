@@ -8,6 +8,8 @@
 - name: Install logstash Conf
   template: src={{ logstash_conf_template }}
             dest={{ logstash_conf_file }}
+            owner={{ logstash_user }}
+            group={{ logstash_group }}
             mode=0664
   when: logstash_conf_template
 
