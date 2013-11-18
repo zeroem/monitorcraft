@@ -16,5 +16,6 @@
         path={{ item }}
         owner={{ system_user }}
         group={{ system_user_group }}
+        mode=0775
   with_items: system_user_dirs
 
