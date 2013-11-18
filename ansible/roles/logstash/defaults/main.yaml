@@ -6,7 +6,7 @@ logstash_user: logstash
 logstash_group: logstash
 
 logstash_run_as: "{{ logstash_user }}"
-logstash_run_as_group: "{{ lgostash_group }}"
+logstash_run_as_group: "{{ logstash_group }}"
 logstash_run_dir: /var/logstash
 
 logstash_java_opts: ""

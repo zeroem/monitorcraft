@@ -17,7 +17,7 @@ env HOME={{ logstash_home }}
 
 chdir {{ logstash_run_dir }}
 setuid {{ logstash_run_as }}
-setgid {{ logstash_run_group }}
+setgid {{ logstash_run_as_group }}
 emits {{ logstash_upstart_name }}-running
 console log
 
