@@ -1,0 +1,8 @@
+---
+allow_duplicates: yes
+dependencies:
+  - role: system_user
+    system_user: "{{ logstash_user }}"
+    system_user_dirs:
+      - "{{ logstash_lib_dir }}"
+      - "{{ logstash_conf_dir }}"

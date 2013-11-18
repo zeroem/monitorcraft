@@ -1,4 +1,5 @@
 ---
+allow_duplicates: yes
 dependencies:
   - role: system_user
     system_user: "{{ redis_user }}"
