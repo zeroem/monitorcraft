@@ -17,8 +17,8 @@ output {
     debug => true
   }
   redis {
-    host => "{{ minecraft_logstash_redis_host }}"
-    port => "{{ minecraft_logstash_redis_port }}"
+    host => "{{ logstash_redis_host }}"
+    port => "{{ logstash_redis_port }}"
     data_type => "channel"
     key => "logstash"
   }

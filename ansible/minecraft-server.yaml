@@ -4,10 +4,6 @@
   vars_files:
     - shared-vars.yaml
 
-  vars:
-    minecraft_logstash_redis_host: "{{ logstash_redis_host }}"
-    minecraft_logstash_redis_port: "{{ logstash_redis_port }}"
-
   roles:
     - role: minecraft
     - role: logstash
