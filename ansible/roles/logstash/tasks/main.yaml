@@ -1,11 +1,6 @@
-- name: logstash bin dir
-  file: path={{ logstash_bin_dir }}
-        state=directory
-        mode=0755
-
 - name: Get Logstash jar
-  copy: src={{ logstash_binary }}
-        dest={{ logstash_bin_dir }}/logstash-flat.jar
+  copy: src={{ logstash_jar }}
+        dest={{ logstash_lib_dir }}/logstash-flat.jar
         owner={{ logstash_user }}
         group={{ logstash_group }}
         mode=0555
@@ -14,7 +9,7 @@
   template: src={{ logstash_conf_template }}
             dest={{ logstash_conf_file }}
             mode=0664
-  when: logstash_conf_template != ""
+  when: logstash_conf_template
 
 - name: install logstash into upstart
   template: src=logstash.conf.j2

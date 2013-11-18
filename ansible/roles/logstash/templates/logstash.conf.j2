@@ -1,7 +1,4 @@
-# logstash-indexer.conf# logstash - indexer instance
-#
-
-description     "logstash indexer instance"
+description     "logstash: {{ logstash_upstart_name }}"
 
 start on virtual-filesystems
 stop on runlevel [06]
@@ -18,16 +15,18 @@ env HOME={{ logstash_home }}
 
 #env JAVA_OPTS='-Xms512m -Xmx512m'
 
-chdir {{ logstash_home }}
-setuid {{ logstash_user }}
-setgid {{ logstash_group }}
+chdir {{ logstash_run_dir }}
+setuid {{ logstash_run_as }}
+setgid {{ logstash_run_group }}
+emits {{ logstash_upstart_name }}-running
 console log
 
 # for versions 1.1.1 - 1.1.4 the internal web service crashes when touched
 # and the current workaround is to just not run it and run Kibana instead
 
 script
-exec java {{ logstash_java_opts }} \
-        -jar {{ logstash_bin_dir}}/logstash-flat.jar {{ logstash_opts }}
-end script
+  exec java {{ logstash_java_opts }} \
+        -jar {{ logstash_lib_dir}}/logstash-flat.jar {{ logstash_opts }}
 
+  initctl --no-wait emit {{ logstash_upstart_name }}-running
+end script

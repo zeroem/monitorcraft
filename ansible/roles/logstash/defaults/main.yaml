@@ -1,9 +1,13 @@
-logstash_binary: logstash-1.2.2-flatjar.jar
-logstash_bin_dir: /opt/logstash
+logstash_jar: logstash-1.2.2-flatjar.jar
+logstash_lib_dir: /opt/logstash
 logstash_home: /var/logstash
 logstash_conf_dir: /etc/logstash.d
 logstash_user: logstash
 logstash_group: logstash
+
+logstash_run_as: "{{ logstash_user }}"
+logstash_run_as_group: "{{ lgostash_group }}"
+logstash_run_dir: /var/logstash
 
 logstash_java_opts: ""
 logstash_upstart_name: logstash
