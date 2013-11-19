@@ -9,7 +9,12 @@ apt-get -y --fix-missing install \
   openjdk-7-jre-headless libcairo2-dev python-cairo python-rrdtool \
   memcached nodejs collectd
 
-apt-get -y remove --auto-remove puppet 
+apt-get -y remove --auto-remove puppet
+
+
+# clean up collectd data
+stop collectd
+rm -rf /var/lib/collectd/rrd
 
 echo "UseDNS no" >> /etc/ssh/sshd_config
 
