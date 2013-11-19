@@ -13,7 +13,7 @@ apt-get -y remove --auto-remove puppet
 
 
 # clean up collectd data
-stop collectd
+service collectd stop
 rm -rf /var/lib/collectd/rrd
 
 echo "UseDNS no" >> /etc/ssh/sshd_config
