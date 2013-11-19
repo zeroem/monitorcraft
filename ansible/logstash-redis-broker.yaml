@@ -5,8 +5,9 @@
     - shared-vars.yaml
 
   roles:
-    - role: "redis"
-    - role: "logstash"
+    - role: collectd
+    - role: redis
+    - role: logstash
       logstash_run_as: root
       logstash_conf_template: "logstash.d/redis.conf.j2"
       logstash_home: "{{ redis_home }}"

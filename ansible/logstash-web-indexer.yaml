@@ -2,6 +2,7 @@
   sudo: yes
 
   roles:
+    - role: collectd
     - role: system_user
       system_user: "{{ logstash_user }}"
       system_user_dirs:

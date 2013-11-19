@@ -1,8 +1,0 @@
----
-- hosts: all
-  sudo: yes
-
-  roles:
-    - role: collectd
-
-

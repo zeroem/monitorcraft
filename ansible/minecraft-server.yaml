@@ -5,6 +5,7 @@
     - shared-vars.yaml
 
   roles:
+    - role: collectd
     - role: minecraft
     - role: logstash
       logstash_run_as: "{{ minecraft_user }}"
