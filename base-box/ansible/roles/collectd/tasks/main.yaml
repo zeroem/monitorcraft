@@ -1,0 +1,14 @@
+---
+- name: Install collectd
+  apt: pkg=collectd state=latest
+
+- name: install confs
+  template: src={{ item }}
+        dest=/etc/collectd/
+        mode=0644
+  with_items:
+    - collectd.conf
+
+- name: restart collectd
+  service: name=collectd
+           state=restarted

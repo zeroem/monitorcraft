@@ -1,7 +1,7 @@
 /roles/supervise
 /roles/supervisord
 /.vagrant
-/vagrant_ansible_inventory*
+vagrant_ansible_inventory*
 /ansible/roles/minecraft/files/minecraft_server*.jar
 /ansible/roles/logstash/files/logstash*.jar
 /ansible/roles/redis/files/redis-2.6.16.tar.gz
