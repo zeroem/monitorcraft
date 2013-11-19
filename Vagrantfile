@@ -4,7 +4,7 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-VM_BOX = "ubuntu13-monitorcraft-base"
+VM_BOX = "monitorcraft-base"
 
 Vagrant.require_plugin "vagrant-hostmanager"
 
