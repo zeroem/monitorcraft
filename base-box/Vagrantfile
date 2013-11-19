@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu13-lxc"
-  config.vm.box_url = "http://dl.dropbox.com/u/13510779/lxc-raring-amd64-2013-07-12.box"
+  config.vm.box = "saucy64-lxc"
+  config.vm.box_url = "http://bit.ly/vagrant-lxc-saucy64-2013-10-23"
 
   config.vm.provision :shell, path: "provision.sh"
 end
