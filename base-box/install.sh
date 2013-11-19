@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 BOX_NAME=monitorcraft-base
 
 vagrant up --provider lxc
