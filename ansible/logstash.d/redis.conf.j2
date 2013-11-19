@@ -1,0 +1,25 @@
+input {
+  file {
+    path => [ "/var/log/upstart/{{ redis_upstart_name }}.log" ]
+  }
+}
+
+filter {
+  grok {
+    match => [ "message", "^\[(?<pid>[0-9]*)\] (?<timestamp>[0-9]* [a-zA-Z]* [0-9:.]*) (?<message>.*)$" ]
+    overwrite => [ "message" ]
+  }
+}
+
+output {
+  stdout {
+    codec => "rubydebug"
+    debug => true
+  }
+  redis {
+    host => "{{ logstash_redis_host }}"
+    port => "{{ logstash_redis_port }}"
+    data_type => "channel"
+    key => "logstash"
+  }
+}
