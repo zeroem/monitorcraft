@@ -1,6 +1,14 @@
 - hosts: all
   sudo: yes
 
+  vars_files:
+    - shared-vars.yaml
+
   roles:
+    - role: riemann
+
     - role: collectd
+      carbon_port: "{{ riemann_carbon_port }}"
+      carbon_host: "{{ riemann_host }}"
+
     - role: graphite

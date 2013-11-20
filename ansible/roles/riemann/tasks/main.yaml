@@ -1,0 +1,12 @@
+---
+- name: Install collectd
+  apt: pkg=riemann state=present
+
+- name: install confs
+  template: src={{ riemann_config }}
+        dest=/etc/riemann/riemann.config
+        mode=0644
+
+- name: restart riemann
+  service: name=riemann
+           state=reloaded

@@ -5,8 +5,14 @@
     - shared-vars.yaml
 
   roles:
+    - role: riemann
+
     - role: collectd
+      carbon_port: "{{ riemann_carbon_port }}"
+      carbon_host: "{{ riemann_host }}"
+
     - role: redis
+
     - role: logstash
       logstash_run_as: root
       logstash_conf_template: "logstash.d/redis.conf.j2"

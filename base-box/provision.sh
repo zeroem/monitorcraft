@@ -9,6 +9,8 @@ apt-get -y --fix-missing install \
   openjdk-7-jre-headless libcairo2-dev python-cairo python-rrdtool \
   memcached nodejs collectd
 
+dpkg -i /vagrant/riemann_0.2.3_all.deb
+
 apt-get -y remove --auto-remove puppet
 
 

@@ -5,7 +5,7 @@ console log
 exec start-stop-daemon \
   --chdir {{ graphite_home }} --chuid {{ graphite_user }}:{{ graphite_group }} \
   --user {{ graphite_user}} --pidfile /var/graphite/carbon-cache.pid \
-  --exec /var/graphite/bin/carbon-cache.py --start -- --pidfile=/var/graphite/carbon-cache.pid --logdir=/var/graphite --nodaemon start
+  --exec {{ carbon_command }} --start -- --pidfile=/var/graphite/carbon-cache.pid --logdir=/var/graphite --nodaemon start
 
 start on runlevel [2345]
 stop on runlevel [^2345]

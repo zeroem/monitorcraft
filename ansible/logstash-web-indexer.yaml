@@ -1,12 +1,21 @@
 - hosts: all
   sudo: yes
 
+  vars_files:
+    - shared-vars.yaml
+
   roles:
+    - role: riemann
+
     - role: collectd
+      carbon_port: "{{ riemann_carbon_port }}"
+      carbon_host: "{{ riemann_host }}"
+
     - role: system_user
       system_user: "{{ logstash_user }}"
       system_user_dirs:
         - "{{ logstash_home }}"
         - "{{ logstash_conf_dir }}"
+
     - role: "logstash"
       logstash_conf_template: logstash.d/logstash-web-indexer.conf
