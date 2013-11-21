@@ -4,6 +4,7 @@ set -e
 
 BOX_NAME=monitorcraft-base
 
+rm -f package.box
 vagrant up --provider lxc
 vagrant package
 vagrant box add $BOX_NAME package.box --force --provider lxc 
