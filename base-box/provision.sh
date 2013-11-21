@@ -6,7 +6,7 @@ apt-get update
 apt-get -y --fix-missing install \
   python-pip python-virtualenv python-apt python-pycurl python-dev \
   python-setuptools python-setuptools-git python-pkg-resources git \
-  openjdk-7-jre-headless collectd
+  openjdk-7-jre-headless openjdk-7-jdk collectd
 
 dpkg -i /vagrant/riemann_0.2.3_all.deb
 
