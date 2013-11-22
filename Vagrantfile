@@ -8,52 +8,28 @@ VM_BOX = "monitorcraft-base"
 
 Vagrant.require_plugin "vagrant-hostmanager"
 
+def consistent_box(config, name)
+  config.vm.define name do |vm|
+    vm.vm.box = VM_BOX
+    vm.vm.hostname = name
+
+    vm.vm.provision :ansible do |ansible|
+      ansible.host_key_checking = false
+      ansible.verbose = "v"
+      ansible.playbook = "ansible/" + name + ".yaml"
+    end
+  end
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
 
-  config.vm.define "graphite" do |graphite|
-    graphite.vm.box = VM_BOX
-    graphite.vm.hostname = "graphite"
-    graphite.vm.provision :ansible do |ansible|
-      ansible.host_key_checking = false
-      ansible.verbose = "v"
-      ansible.playbook = "ansible/graphite.yaml"
-    end
-  end
-
-  config.vm.define "logstash-redis-broker" do |redis|
-    redis.vm.box = VM_BOX
-    redis.vm.hostname = "logstash-redis-broker"
-    redis.vm.provision :ansible do |ansible|
-      ansible.host_key_checking = false
-      ansible.verbose = "v"
-      ansible.playbook = "ansible/logstash-redis-broker.yaml"
-    end
-  end
-
-  config.vm.define "logstash-web-indexer" do |ls|
-    ls.vm.box = VM_BOX
-    ls.vm.hostname = "logstash-web-indexer"
-
-    ls.vm.provision :ansible do |ansible|
-      ansible.host_key_checking = false
-      ansible.verbose = "v"
-      ansible.playbook = "ansible/logstash-web-indexer.yaml"
-    end
-  end
-
-  config.vm.define "minecraft-server" do |mc|
-    mc.vm.box = VM_BOX
-    mc.vm.hostname = "minecraft-server"
-    mc.vm.network :forwarded_port, guest: 25565, host: 25565
-    mc.vm.provision :ansible do |ansible|
-      ansible.host_key_checking = false
-      ansible.verbose = "v"
-      ansible.playbook = "ansible/minecraft-server.yaml"
-    end
-  end
+  consistent_box(config, "graphite")
+  consistent_box(config, "logstash-redis-broker")
+  consistent_box(config, "logstash-web-indexer")
+  consistent_box(config, "minecraft-server")
 
 
   # All Vagrant configuration is done here. The most common configuration
