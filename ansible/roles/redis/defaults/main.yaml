@@ -1,4 +1,4 @@
-redis_extracted_dir: redis-2.6.16
+redis_extracted_dir: redis-2.8.0
 redis_binary: "{{ redis_extracted_dir }}.tar.gz"
 redis_bin_dir: /opt/redis
 redis_src_dir: "{{ redis_bin_dir }}/{{ redis_extracted_dir }}"
