@@ -1,1 +1,1 @@
-riemann_config: riemann-graphite-relay.config.j2
+riemann_config: riemann.config.j2
