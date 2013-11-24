@@ -9,8 +9,8 @@
       riemann_config: riemann-graphite-relay.config.j2
 
     - role: collectd
-      carbon_port: "{{ riemann_carbon_port }}"
-      carbon_host: "{{ riemann_host }}"
+      carbon_port: "{{ carbon_relay_port }}"
+      carbon_host: "{{ carbon_relay_host }}"
 
     - role: system_user
       system_user: "{{ logstash_user }}"

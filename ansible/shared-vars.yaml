@@ -4,5 +4,5 @@ logstash_redis_port: 6379
 carbon_host: graphite
 carbon_port: 2003
 
-riemann_host: 127.0.0.1
-riemann_carbon_port: 5553
+carbon_relay_host: 127.0.0.1
+carbon_relay_port: 5553
