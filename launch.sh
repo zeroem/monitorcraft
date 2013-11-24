@@ -6,6 +6,7 @@ set -e
 # running before anything else
 vagrant up redis
 vagrant up graphite
+vagrant up riemann
 
 # start up everything else
 vagrant up
