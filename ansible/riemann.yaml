@@ -6,3 +6,4 @@
 
   roles:
     - role: riemann
+    - role: riemann-dash

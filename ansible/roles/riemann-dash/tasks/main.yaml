@@ -1,0 +1,13 @@
+---
+- name: Install Ruby
+  apt:  pkg={{ item }}
+        state=latest
+  with_items:
+    - ruby
+    - ruby-dev
+
+- name: Install Riemann Dash
+  gem:  name=riemann-dash
+        state=latest
+
+
