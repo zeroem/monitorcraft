@@ -1,0 +1,4 @@
+---
+riemann_dash_config: ""
+riemann_dash_config_dir: /etc/riemann-dash
+riemann_dash_home: /var/riemann-dash

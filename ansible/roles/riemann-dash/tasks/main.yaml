@@ -9,5 +9,32 @@
 - name: Install Riemann Dash
   gem:  name=riemann-dash
         state=latest
+        user_install=no
 
+- name: Setup riemann-dash run dir
+  file: path={{ item }}
+        state=directory
+        mode=0775
+        owner=riemann
+        group=riemann
+  with_items:
+    - "{{ riemann_dash_home }}"
+    - "{{ riemann_dash_config_dir }}"
 
+- name: install riemann-dash confs
+  template: src=config.rb.j2
+            dest={{ riemann_dash_home }}/config.rb
+            owner=riemann
+            group=riemann
+            mode=0664
+
+- name: install upstart confs
+  template: src={{ item }}
+        dest=/etc/init/riemann-dash.conf
+        mode=0644
+  with_items:
+    - riemann-dash.conf.j2
+
+- name: restart riemann-dash
+  service: name=riemann-dash
+           state=restarted
