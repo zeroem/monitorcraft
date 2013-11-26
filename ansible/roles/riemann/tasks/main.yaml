@@ -10,3 +10,4 @@
 - name: restart riemann
   service: name=riemann
            state=reloaded
+           enabled=yes
