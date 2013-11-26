@@ -5,4 +5,4 @@ vagrant_ansible_inventory*
 /ansible/roles/minecraft/files/minecraft_server*.jar
 /ansible/roles/logstash/files/logstash*.jar
 /ansible/roles/redis/files/redis-*.tar.gz
-base-box/riemann_0.2.3_all.deb
+base-box/riemann_*.deb

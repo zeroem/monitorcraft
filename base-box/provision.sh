@@ -8,7 +8,7 @@ apt-get -y --fix-missing install \
   python-setuptools python-setuptools-git python-pkg-resources git \
   openjdk-7-jre-headless openjdk-7-jdk collectd
 
-dpkg -i /vagrant/riemann_0.2.3_all.deb
+dpkg -i /vagrant/riemann_0.2.4_all.deb
 
 apt-get -y remove --auto-remove puppet
 
