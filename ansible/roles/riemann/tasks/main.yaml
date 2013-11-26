@@ -1,6 +1,6 @@
 ---
-- name: Install collectd
-  apt: pkg=riemann state=present
+- name: Install Riemann
+  command: dpkg -i /vagrant/ansible/roles/riemann/files/riemann_0.2.4_all.deb
 
 - name: install confs
   template: src={{ riemann_config }}
