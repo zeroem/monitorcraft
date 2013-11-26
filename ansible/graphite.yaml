@@ -6,6 +6,7 @@
 
   roles:
     - role: riemann
+      riemann_config: riemann-graphite-relay.config.j2
 
     - role: collectd
       carbon_port: "{{ carbon_relay_port }}"
