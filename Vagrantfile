@@ -27,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.manage_host = true
 
   consistent_box(config, "graphite")
-  consistent_box(config, "logstash-web-indexer")
+  consistent_box(config, "logstash")
   consistent_box(config, "minecraft")
   consistent_box(config, "redis")
   consistent_box(config, "riemann")
