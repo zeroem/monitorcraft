@@ -6,3 +6,6 @@ carbon_port: 2003
 
 carbon_relay_host: 127.0.0.1
 carbon_relay_port: 5553
+
+metrics_collection_host: riemann
+metrics_collection_port: 5555

@@ -11,8 +11,8 @@
   (ws-server  :host host)
   (graphite-server :host host :port {{ carbon_relay_port }}))
 
-(def graph (graphite {:host "{{ carbon_host }}" :port {{ carbon_port }}}))
+(def riemann-indexer (tcp-client :host "{{ metrics_collection_host }}" :port {{ metrics_collection_port }}))
 
 ; Inbound events will be passed to these streams:
 (streams
-  graph)
+  riemann-indexer)

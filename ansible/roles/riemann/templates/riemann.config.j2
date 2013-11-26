@@ -5,10 +5,13 @@
 
 ; Listen on the local interface over TCP (5555), UDP (5555), and websockets
 ; (5556)
-(let [host "127.0.0.1"]
+(let [host "0.0.0.0"]
   (tcp-server :host host)
   (udp-server :host host)
   (ws-server  :host host))
+
+
+(def graph (graphite {:host "{{ carbon_host }}" :port {{ carbon_port }}}))
 
 ; Expire old events from the index every 5 seconds.
 (periodically-expire 5)
@@ -18,6 +21,8 @@
 
   ; Inbound events will be passed to these streams:
   (streams
+    ; log everything to graphite for midterm storage
+    graph
 
     ; Index all events immediately.
     index
