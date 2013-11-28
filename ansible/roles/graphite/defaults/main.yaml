@@ -9,11 +9,20 @@ graphite_virtualenv: "{{virtualenv_home}}/graphite"
 graphite_bin: "{{ graphite_virtualenv }}/bin"
 graphite_python: "{{ graphite_bin }}/python"
 graphite_gunicorn_django: "{{ graphite_virtualenv }}/bin/gunicorn_django"
+graphite_storage_location: "{{ graphite_home }}/storage"
+graphite_db_name: "graphite_db"
+graphite_db_engine: "django.db.backends.sqlite3"
+graphite_secret_key: "UNSAFE_DEFAULT"
+
+# comma separated strings
+graphite_memcache_hosts: "'localhost:11211'"
+
 
 graphite_packages:
   - graphite-web
   - carbon
   - ceres
+
 graphite_version: "master"
 
 graphite_carbon_conf_files:

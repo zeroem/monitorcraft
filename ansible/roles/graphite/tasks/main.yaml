@@ -50,12 +50,9 @@
   sudo_user: "{{ graphite_user }}"
 
 - name: change sqlite storage location
-  lineinfile: >
-    dest={{ graphite_home }}/webapp/graphite/settings.py
-    state=present
-    regexp=\'NAME\':\\s+\'/opt
-    line="'NAME': '{{ graphite_home }}/storage/graphite_db',"
-    backup=yes
+  template: src=settings.py.j2
+            dest={{ graphite_home }}/webapp/graphite/settings.py
+            mode=0755
   sudo_user: "{{ graphite_user }}"
 
 - name: setup sqlite
