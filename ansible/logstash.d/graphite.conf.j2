@@ -1,0 +1,19 @@
+input {
+  file {
+    path => [ "{{ graphite_storage_location }}/log/webapp/*.log" ]
+    type => "graphite-web"
+  }
+}
+
+output {
+  stdout {
+    codec => "rubydebug"
+    debug => true
+  }
+  redis {
+    host => "{{ logstash_redis_host }}"
+    port => "{{ logstash_redis_port }}"
+    data_type => "channel"
+    key => "logstash"
+  }
+}

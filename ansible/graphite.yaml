@@ -10,3 +10,7 @@
       carbon_host: "{{ carbon_relay_host }}"
 
     - role: graphite
+
+    - role: logstash
+      logstash_run_as: root
+      logstash_conf_template: "logstash.d/graphite.conf.j2"
