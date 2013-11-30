@@ -5,6 +5,13 @@ input {
   }
 }
 
+filter {
+  grok {
+    match => [ "message", ".* :: (?<message>.*)$" ]
+    overwrite => [ "message" ]
+  }
+}
+
 output {
   stdout {
     codec => "rubydebug"
