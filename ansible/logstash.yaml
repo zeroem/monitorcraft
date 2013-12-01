@@ -16,4 +16,4 @@
         - "{{ logstash_conf_dir }}"
 
     - role: "logstash"
-      logstash_conf_template: logstash.d/logstash-web-indexer.conf
+      logstash_conf_template: logstash.d/logstash-web-indexer.conf.j2
