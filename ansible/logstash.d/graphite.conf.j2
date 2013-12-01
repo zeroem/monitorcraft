@@ -1,23 +1,27 @@
 input {
   file {
     path => [ "{{ graphite_storage_location }}/log/webapp/*.log" ]
-    type => "graphite-web"
+    type => "graphite_web"
   }
   file {
     path => [ "/var/log/upstart/carbon-cache.log" ]
-    type => "carbon-cache"
+    type => "carbon_cache"
+  }
+  file {
+    path => [ "/var/log/syslog" ]
+    type => "syslog"
   }
 }
 
 filter {
   grok {
-    type => "graphite-web"
+    type => "graphite_web"
     match => [ "message", ".* :: (?<message>.*)$" ]
     overwrite => [ "message" ]
   }
   grok {
-    type => "carbon-cache"
-    match => [ "message", ".* :: \[(?<event>[a-z]*)\] (?<message>.*)$" ]
+    type => "carbon_cache"
+    match => [ "message", ".* :: \[(?<event>[a-z]*)\] (?<message>.*)\r$" ]
     overwrite => [ "message" ]
   }
 }

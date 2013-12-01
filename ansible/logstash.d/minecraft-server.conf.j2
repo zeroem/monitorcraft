@@ -2,6 +2,10 @@ input {
   file {
     path => [ "{{ minecraft_chdir }}/logs/latest.log" ]
   }
+  file {
+    path => [ "/var/log/syslog" ]
+    type => "syslog"
+  }
 }
 
 filter {

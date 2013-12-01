@@ -2,6 +2,10 @@ input {
   file {
     path => [ "/var/log/upstart/{{ redis_upstart_name }}.log" ]
   }
+  file {
+    path => [ "/var/log/syslog" ]
+    type => "syslog"
+  }
 }
 
 filter {
