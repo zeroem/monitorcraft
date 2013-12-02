@@ -6,6 +6,10 @@ input {
     path => [ "/var/log/syslog" ]
     type => "syslog"
   }
+  file {
+    path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
+    type => "logstash"
+  }
 }
 
 filter {
@@ -16,10 +20,6 @@ filter {
 }
 
 output {
-  stdout {
-    codec => "rubydebug"
-    debug => true
-  }
   redis {
     host => "{{ logstash_redis_host }}"
     port => "{{ logstash_redis_port }}"

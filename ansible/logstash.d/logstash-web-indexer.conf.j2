@@ -9,6 +9,10 @@ input {
     path => [ "/var/log/syslog" ]
     type => "syslog"
   }
+  file {
+    path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
+    type => "logstash"
+  }
 }
 
 filter {
@@ -19,8 +23,5 @@ filter {
 }
 
 output {
-  stdout {
-    codec => "rubydebug"
-  }
   elasticsearch { embedded => true }
 }
