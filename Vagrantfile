@@ -31,6 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   consistent_box(config, "minecraft")
   consistent_box(config, "redis")
   consistent_box(config, "riemann")
+  consistent_box(config, "statsd")
 
 
   # All Vagrant configuration is done here. The most common configuration

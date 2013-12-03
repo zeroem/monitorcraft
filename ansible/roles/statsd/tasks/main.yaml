@@ -1,0 +1,35 @@
+---
+- name: install node
+  apt: pkg=nodejs state=latest
+
+- name: get statsd
+  git: >
+    repo={{ statsd_repo }}
+    version={{ statsd_version }}
+    dest={{ statsd_lib_dir }}/statsd
+
+- name: change ownership
+  file: >
+    path={{ statsd_lib_dir }}/statsd
+    state=directory
+    recurse=yes
+    owner={{ statsd_user }}
+    group={{ statsd_group }}
+
+- name: install config
+  template: >
+    src=statsd-config.js.j2
+    dest=/etc/statsd-config.js
+    owner={{ statsd_user }}
+    group={{ statsd_group }}
+    mode=0644
+
+- name: install upstart
+  template: >
+    src=statsd.conf.j2
+    dest=/etc/init/statsd.conf
+
+- name: get it going
+  service: >
+    name=statsd
+    state=restarted

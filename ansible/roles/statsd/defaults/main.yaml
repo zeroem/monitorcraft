@@ -1,0 +1,9 @@
+statsd_user: statsd
+statsd_group: "{{ statsd_user }}"
+statsd_home: "/var/{{ statsd_user }}"
+statsd_port: 8125
+
+statsd_repo: https://github.com/etsy/statsd
+statsd_version: 'v0.6.0'
+statsd_lib_dir: /opt/
+

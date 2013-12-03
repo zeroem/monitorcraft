@@ -1,0 +1,24 @@
+# statsd server
+#
+
+description     "statsd server"
+
+start on virtual-filesystems
+stop on runlevel [06]
+
+respawn
+respawn limit 5 30
+
+env HOME={{ statsd_home }}
+
+chdir {{ statsd_home }}
+setuid {{ statsd_user }}
+setgid {{ statsd_group }}
+console log
+
+# for versions 1.1.1 - 1.1.4 the internal web service crashes when touched
+# and the current workaround is to just not run it and run Kibana instead
+
+script
+  exec nodejs {{ statsd_lib_dir }}/statsd/stats.js /etc/statsd-config.js
+end script
