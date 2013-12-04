@@ -1,6 +1,7 @@
 input {
   file {
     path => [ "{{ minecraft_chdir }}/logs/latest.log" ]
+    type => "minecraft"
   }
   file {
     path => [ "/var/log/syslog" ]
@@ -14,8 +15,29 @@ input {
 
 filter {
   grok {
+    type => "minecraft"
     match => [ "message", "(?<jvm_uptime>[^|])\|(?<level>[^|]+)\|(?<thread>[^|]*)\|(?<logger>[^|]*)\|(?<class>[^|]*)\|(?<timestamp>[^|]*)\|(?<message>.*)" ]
     overwrite => [ "message" ]
+    break_on_match => false
+  }
+
+  grok {
+    type => "minecraft"
+    match => [ "message",  "^(?<player>[a-zA-Z0-9_]+) joined the game$" ]
+    add_tag => [ "player_join" ]
+  }
+
+  grok {
+    type => "minecraft"
+    match => [ "message", "^(?<player>[a-zA-Z0-9_]+) left the game$" ]
+    add_tag => [ "player_part" ]
+  }
+
+  grok {
+    type => "minecraft"
+    overwrite => [ "message" ]
+    match => [ "message", "^<(?<player>[a-zA-Z0-9_]+)> (?<message>.*)$" ]
+    add_tag => [ "chat" ]
   }
 }
 
