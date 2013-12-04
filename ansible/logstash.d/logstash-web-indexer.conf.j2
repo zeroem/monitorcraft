@@ -7,18 +7,19 @@ input {
   }
   file {
     path => [ "/var/log/syslog" ]
-    type => "syslog"
+    tags => ["syslog"]
   }
   file {
     path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
-    type => "logstash"
+    tags => ["logstash"]
   }
 }
 
 filter {
-  grok {
-    type => "syslog"
-    match => [ "message", "^%{SYSLOGBASE}(?<syslog>.*)" ]
+  if "syslog" in [tags] {
+    grok {
+      match => [ "message", "^%{SYSLOGBASE}(?<syslog>.*)" ]
+    }
   }
 }
 

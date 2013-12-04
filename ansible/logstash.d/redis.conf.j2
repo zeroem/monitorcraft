@@ -1,21 +1,24 @@
 input {
   file {
     path => [ "/var/log/upstart/{{ redis_upstart_name }}.log" ]
+    tags => ["redis"]
   }
   file {
     path => [ "/var/log/syslog" ]
-    type => "syslog"
+    tags => ["syslog"]
   }
   file {
     path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
-    type => "logstash"
+    tags => ["logstash"]
   }
 }
 
 filter {
-  grok {
-    match => [ "message", "^\[(?<pid>[0-9]*)\] (?<timestamp>[0-9]* [a-zA-Z]* [0-9:.]*) (?<message>.*)$" ]
-    overwrite => [ "message" ]
+  if "redis" in [tags] {
+    grok {
+      match => [ "message", "^\[(?<pid>[0-9]*)\] (?<timestamp>[0-9]* [a-zA-Z]* [0-9:.]*) (?<message>.*)$" ]
+      overwrite => [ "message" ]
+    }
   }
 }
 

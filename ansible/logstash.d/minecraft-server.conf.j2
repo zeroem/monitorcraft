@@ -1,43 +1,41 @@
 input {
   file {
     path => [ "{{ minecraft_chdir }}/logs/latest.log" ]
-    type => "minecraft"
+    tags => ["minecraft"]
   }
   file {
     path => [ "/var/log/syslog" ]
-    type => "syslog"
+    tags => ["syslog"]
   }
   file {
     path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
-    type => "logstash"
+    tags => ["logstash"]
   }
 }
 
 filter {
-  grok {
-    type => "minecraft"
-    match => [ "message", "(?<jvm_uptime>[^|])\|(?<level>[^|]+)\|(?<thread>[^|]*)\|(?<logger>[^|]*)\|(?<class>[^|]*)\|(?<timestamp>[^|]*)\|(?<message>.*)" ]
-    overwrite => [ "message" ]
-    break_on_match => false
-  }
+  if "minecraft" in [tags] {
+    grok {
+      match => [ "message", "(?<jvm_uptime>[^|])\|(?<level>[^|]+)\|(?<thread>[^|]*)\|(?<logger>[^|]*)\|(?<class>[^|]*)\|(?<timestamp>[^|]*)\|(?<message>.*)" ]
+      overwrite => [ "message" ]
+      break_on_match => false
+    }
 
-  grok {
-    type => "minecraft"
-    match => [ "message",  "^(?<player>[a-zA-Z0-9_]+) joined the game$" ]
-    add_tag => [ "player_join" ]
-  }
+    grok {
+      match => [ "message",  "^(?<player>[a-zA-Z0-9_]+) joined the game$" ]
+      add_tag => [ "player", "join" ]
+    }
 
-  grok {
-    type => "minecraft"
-    match => [ "message", "^(?<player>[a-zA-Z0-9_]+) left the game$" ]
-    add_tag => [ "player_part" ]
-  }
+    grok {
+      match => [ "message", "^(?<player>[a-zA-Z0-9_]+) left the game$" ]
+      add_tag => [ "player", "part" ]
+    }
 
-  grok {
-    type => "minecraft"
-    overwrite => [ "message" ]
-    match => [ "message", "^<(?<player>[a-zA-Z0-9_]+)> (?<message>.*)$" ]
-    add_tag => [ "chat" ]
+    grok {
+      overwrite => [ "message" ]
+      match => [ "message", "^<(?<player>[a-zA-Z0-9_]+)> (?<message>.*)$" ]
+      add_tag => [ "player", "chat" ]
+    }
   }
 }
 

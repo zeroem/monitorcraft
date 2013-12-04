@@ -1,32 +1,36 @@
 input {
   file {
     path => [ "{{ graphite_storage_location }}/log/webapp/*.log" ]
-    type => "graphite_web"
+    tags => ["graphite_web"]
   }
   file {
     path => [ "/var/log/upstart/carbon-cache.log" ]
-    type => "carbon_cache"
+    tags => ["carbon_cache"]
   }
   file {
     path => [ "/var/log/syslog" ]
-    type => "syslog"
+    tags => ["syslog"]
   }
   file {
     path => [ "/var/log/upstart/{{ logstash_upstart_name }}.log" ]
-    type => "logstash"
+    tags => ["logstash"]
   }
 }
 
 filter {
-  grok {
-    type => "graphite_web"
-    match => [ "message", ".* :: (?<message>.*)$" ]
-    overwrite => [ "message" ]
+  if "graphite_web" in [tags] {
+    grok {
+      match => [ "message", ".* :: (?<message>.*)$" ]
+      overwrite => [ "message" ]
+    }
   }
-  grok {
-    type => "carbon_cache"
-    match => [ "message", ".* :: \[(?<event>[a-z]*)\] (?<message>.*)\r$" ]
-    overwrite => [ "message" ]
+
+  if "carbon_cache" in [tags] {
+    grok {
+      type => "carbon_cache"
+      match => [ "message", ".* :: \[(?<event>[a-z]*)\] (?<message>.*)\r$" ]
+      overwrite => [ "message" ]
+    }
   }
 }
 
