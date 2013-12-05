@@ -27,7 +27,6 @@ filter {
 
   if "carbon_cache" in [tags] {
     grok {
-      type => "carbon_cache"
       match => [ "message", ".* :: \[(?<event>[a-z]*)\] (?<message>.*)\r$" ]
       overwrite => [ "message" ]
     }
