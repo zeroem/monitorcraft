@@ -12,12 +12,9 @@
     - role: minecraft
 
     - role: logstash
-      logstash_run_as: "{{ minecraft_user }}"
-      logstash_run_group: "{{ minecraft_group }}"
-      logstash_home: "{{ minecraft_chdir }}"
+      logstash_run_as: root
       logstash_conf_template: "logstash.d/minecraft-server.conf.j2"
       logstash_opts: agent -f {{ logstash_conf_file }}
-      logstash_upstart_name: "minecraft-logging"
 
   tasks:
     - service: name=minecraft-server
