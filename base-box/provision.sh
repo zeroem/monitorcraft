@@ -6,13 +6,11 @@ apt-get update
 apt-get -y --fix-missing install \
   python-pip python-virtualenv python-apt python-pycurl python-dev \
   python-setuptools python-setuptools-git python-pkg-resources git \
-  openjdk-7-jre-headless openjdk-7-jdk collectd
+  openjdk-7-jre-headless openjdk-7-jdk ruby1.9.3
+
+gem install riemann-tools --no-rdoc --no-ri
 
 apt-get -y remove --auto-remove puppet
-
-# clean up collectd data
-service collectd stop
-rm -rf /var/lib/collectd/rrd
 
 echo "UseDNS no" >> /etc/ssh/sshd_config
 
