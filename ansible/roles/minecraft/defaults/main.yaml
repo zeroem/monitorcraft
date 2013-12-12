@@ -1,4 +1,4 @@
-minecraft_binary: minecraft_server.1.7.2.jar
+minecraft_binary: minecraft_server.1.7.4.jar
 minecraft_bin_dir: /opt/lib/minecraft
 minecraft_chdir: /var/minecraft
 minecraft_user: minecraft
