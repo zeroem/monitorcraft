@@ -7,6 +7,5 @@ carbon_port: 2003
 carbon_relay_host: riemann
 carbon_relay_port: 5553
 
-metrics_monitoring_host: riemann
-metrics_monitoring_port: 5553
-
+riemann_host: riemann
+riemann_port: 5555

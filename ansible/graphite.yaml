@@ -5,12 +5,8 @@
     - shared-vars.yaml
 
   roles:
-    - role: collectd
-      carbon_port: "{{ carbon_relay_port }}"
-      carbon_host: "{{ carbon_relay_host }}"
-
+    - role: riemann-tools
     - role: graphite
-
     - role: logstash
       logstash_run_as: root
       logstash_conf_template: "logstash.d/graphite.conf.j2"

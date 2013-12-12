@@ -1,0 +1,8 @@
+---
+riemann_tools_user: "riemann"
+riemann_tools_cmd: "riemann-health"
+riemann_tools_options: ""
+riemann_tools_upstart_template: "riemann-tools.conf.j2"
+riemann_tools_upstart_name: "{{ riemann_tools_cmd }}"
+riemann_tools_dest_host: "{{ riemann_host }}"
+riemann_tools_dest_port: "{{ riemann_port }}"

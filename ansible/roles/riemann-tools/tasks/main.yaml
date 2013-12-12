@@ -1,0 +1,16 @@
+---
+- name: install gem
+  gem: >
+        name=riemann-tools
+        state=latest
+
+- name: install confs
+  template: >
+        src={{ riemann_tools_upstart_template }}
+        dest=/etc/init/{{ riemann_tools_upstart_name }}.conf
+        mode=0644
+
+- name: "start {{ riemann_tools_upstart_name }}"
+  service: name={{ riemann_tools_upstart_name }}
+           state=restarted
+           enabled=yes

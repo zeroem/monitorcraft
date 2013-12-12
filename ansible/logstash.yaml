@@ -5,10 +5,6 @@
     - shared-vars.yaml
 
   roles:
-    - role: collectd
-      carbon_port: "{{ carbon_relay_port }}"
-      carbon_host: "{{ carbon_relay_host }}"
-
     - role: system_user
       system_user: "{{ logstash_user }}"
       system_user_dirs:
@@ -18,3 +14,4 @@
     - role: "logstash"
       logstash_run_as: root
       logstash_conf_template: logstash.d/logstash-web-indexer.conf.j2
+    - role: riemann-tools

@@ -5,10 +5,7 @@
     - shared-vars.yaml
 
   roles:
-    - role: collectd
-      carbon_port: "{{ carbon_relay_port }}"
-      carbon_host: "{{ carbon_relay_host }}"
-
+    - role: riemann-tools
     - role: minecraft
 
     - role: logstash

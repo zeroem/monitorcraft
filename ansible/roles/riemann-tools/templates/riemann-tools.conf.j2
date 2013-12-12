@@ -1,0 +1,20 @@
+description     "riemann_tools: {{ riemann_tools_upstart_name }}"
+
+start on virtual-filesystems
+stop on runlevel [06]
+
+respawn
+respawn limit 5 30
+limit nofile 65550 65550
+
+setuid {{ riemann_tools_user }}
+setgid {{ riemann_tools_user }}
+
+emits {{ riemann_tools_upstart_name }}-running
+console log
+
+script
+  exec {{ riemann_tools_cmd }} --host "{{ riemann_tools_dest_host }}" --port {{ riemann_tools_dest_port }} {{ riemann_tools_options }}
+
+  initctl --no-wait emit {{ riemann_tools_upstart_name }}-running
+end script
