@@ -6,6 +6,8 @@
 
   roles:
     - role: riemann-tools
+    - role: riemann-tools
+      riemann_tools_cmd: riemann-net
     - role: redis
 
     - role: logstash

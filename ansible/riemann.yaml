@@ -6,5 +6,7 @@
 
   roles:
     - role: riemann-tools
+    - role: riemann-tools
+      riemann_tools_cmd: riemann-net
     - role: riemann
     - role: riemann-dash

@@ -15,3 +15,5 @@
       logstash_run_as: root
       logstash_conf_template: logstash.d/logstash-web-indexer.conf.j2
     - role: riemann-tools
+    - role: riemann-tools
+      riemann_tools_cmd: riemann-net
