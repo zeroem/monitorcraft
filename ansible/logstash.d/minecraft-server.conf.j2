@@ -27,6 +27,11 @@ filter {
     }
 
     grok {
+      match => [ "message",  "^(?<player>[a-zA-Z0-9_]+) has just earned the achievement \[(?<achievement>[^\[]+)\]$" ]
+      add_tag => [ "player", "achievement" ]
+    }
+
+    grok {
       match => [ "message", "^(?<player>[a-zA-Z0-9_]+) left the game$" ]
       add_tag => [ "player", "part" ]
     }
