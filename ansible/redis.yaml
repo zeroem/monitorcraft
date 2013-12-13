@@ -8,6 +8,9 @@
     - role: riemann-tools
     - role: riemann-tools
       riemann_tools_cmd: riemann-net
+    - role: riemann-tools
+      riemann_tools_cmd: riemann-redis
+      riemann_tools_options: --redis-host redis
     - role: redis
 
     - role: logstash
