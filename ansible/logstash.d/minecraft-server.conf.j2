@@ -1,6 +1,6 @@
 input {
   file {
-    path => [ "{{ minecraft_chdir }}/logs/latest.log" ]
+    path => [ "{{ minecraft_home }}/*/logs/latest.log" ]
     tags => ["minecraft"]
   }
   file {

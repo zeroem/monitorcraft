@@ -1,0 +1,33 @@
+#Minecraft server properties
+#Tue Dec 31 21:50:02 UTC 2013
+generator-settings=
+op-permission-level=4
+allow-nether=true
+level-name=world
+enable-query=false
+allow-flight=false
+announce-player-achievements=true
+server-port={{ minecraft_server_port | default(25565)}}
+level-type=DEFAULT
+enable-rcon=false
+level-seed={{ minecraft_server_level_seed | default('') }}
+force-gamemode=false
+server-ip=
+max-build-height=256
+spawn-npcs=true
+white-list=false
+spawn-animals=true
+hardcore=false
+snooper-enabled=true
+online-mode=true
+resource-pack=
+pvp=true
+difficulty=1
+enable-command-block=false
+gamemode=0
+player-idle-timeout=0
+max-players=20
+spawn-monsters=true
+generate-structures=true
+view-distance=10
+motd={{ minecraft_server_modtd | default('A Minecraft Server') }}

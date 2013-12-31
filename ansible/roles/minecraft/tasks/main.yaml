@@ -5,6 +5,21 @@
         group={{ minecraft_group }}
         mode=0555
 
+- name: server directory
+  file: dest={{ minecraft_server_home }}
+        state=directory
+        owner={{ minecraft_user }}
+        group={{ minecraft_group }}
+        mode=0755
+
+- name: install confs
+  template: src={{ minecraft_server_confs_dir }}/{{ item }}.j2
+            dest={{ minecraft_server_home }}/{{ item }}
+            owner={{ minecraft_user }}
+            group={{ minecraft_group }}
+            mode=0644
+  with_items: minecraft_server_confs
+
 - name: Setup Log4j
   template: src=log4j2.xml.j2
             dest={{ minecraft_bin_dir}}/log4j2.xml
@@ -14,6 +29,6 @@
 
 - name: install minecraft server upstart
   template: src=minecraft-server.conf.j2
-            dest=/etc/init/minecraft-server.conf
+            dest=/etc/init/minecraft-{{ minecraft_server_name }}.conf
             mode=0644
 

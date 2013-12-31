@@ -1,7 +1,7 @@
 # minecraft server
 #
 
-description     "minecraft server"
+description     "minecraft server: {{ minecraft_server_name }}"
 
 start on virtual-filesystems
 stop on runlevel [06]
@@ -9,9 +9,9 @@ stop on runlevel [06]
 respawn
 respawn limit 5 30
 
-env HOME={{ minecraft_chdir }}
+env HOME={{ minecraft_home }}/{{ minecraft_server_name }}
 
-chdir {{ minecraft_chdir }}
+chdir {{ minecraft_home }}/{{ minecraft_server_name }}
 setuid {{ minecraft_user }}
 setgid {{ minecraft_group }}
 console log
@@ -21,5 +21,5 @@ console log
 
 script
         exec java {{ minecraft_java_opts }} {{ minecraft_logging_opts }} \
-          -jar {{ minecraft_bin_dir}}/minecraft-server.jar nogui
+          -jar {{ minecraft_bin_dir }}/minecraft-server.jar nogui
 end script

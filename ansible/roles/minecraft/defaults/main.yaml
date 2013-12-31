@@ -1,8 +1,20 @@
 minecraft_binary: minecraft_server.1.7.4.jar
 minecraft_bin_dir: /opt/lib/minecraft
-minecraft_chdir: /var/minecraft
+minecraft_home: /var/minecraft
 minecraft_user: minecraft
 minecraft_group: minecraft
 
 minecraft_java_opts: "-Xms1G -Xmx2G"
 minecraft_logging_opts: "-Dlog4j.configurationFile={{ minecraft_bin_dir }}/log4j2.xml"
+
+minecraft_server_name: "server"
+minecraft_server_home: "{{ minecraft_home }}/{{ minecraft_server_name }}"
+
+minecraft_server_confs_dir: "confs"
+minecraft_server_confs:
+  - banned-ips.txt
+  - banned-players.txt
+  - ops.txt
+  - server.properties
+  - white-list.txt
+
