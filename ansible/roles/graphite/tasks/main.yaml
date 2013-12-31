@@ -55,6 +55,10 @@
             mode=0755
   sudo_user: "{{ graphite_user }}"
 
+- name: workaround for change in graphite install
+  command: cp {{ graphite_repos_dir }}/graphite-web/webapp/manage.py {{ graphite_home }}/webapp/graphite/
+  sudo_user: "{{ graphite_user }}"
+
 - name: setup sqlite
   command: chdir={{ graphite_home }}/webapp/graphite
            {{ graphite_python }} manage.py syncdb --noinput
