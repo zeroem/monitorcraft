@@ -1,4 +1,4 @@
-logstash_jar: logstash-1.2.2-flatjar.jar
+logstash_jar: logstash-1.3.2-flatjar.jar
 logstash_lib_dir: /opt/logstash
 logstash_home: /var/logstash
 logstash_conf_dir: /etc/logstash.d
